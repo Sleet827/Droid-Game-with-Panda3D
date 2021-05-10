@@ -1,0 +1,5 @@
+From update v1.0-beta.8.1.0, you have support for creating addons.
+To create addons, don't modify any already created .py files, you can use them for reference of variables.
+You have to create a new py file which has a class and make sure you create a run() method which
+has the main code to run.
+You can use the base variable to access all the variables in the main class.

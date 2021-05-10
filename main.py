@@ -50,6 +50,16 @@ import math
 import logging
 from multiprocessing import Pool # хочу отметить этот модуль - он позволяет работать программе на разных потоках. Из-за этого игра достаточно оптимизирована
 
+# For addons
+import json
+
+config = json.load(open("./addon_config.json"))
+addon_classes = []
+for addon in addon_config:
+    if not config[addon]["disabled"]:
+        exec("from addons." + addon + " import *")
+        addon_classes.append(config[addon]["main_class"])
+
 # Записываем все сообщения в файл logs.txt будут записыватся : имя уровня, время, само сообщение
 logging.basicConfig(
     filename="logs.txt",
@@ -2020,6 +2030,9 @@ class DroidShooter(ShowBase):
         return task.cont # возвращаем задачу
 
 
+
+for addon_class in addon_classes:
+    exec("addon_class.run()")
 
 droid = DroidShooter() # Создадим экземпляр класса нашей игры
 droid.run() # 3апустим игру
