@@ -55,9 +55,9 @@ import json
 
 config = json.load(open("./addon_config.json"))
 addon_classes = []
-for addon in addon_config:
+for addon in config:
     if not config[addon]["disabled"]:
-        exec("from addons." + addon + " import *")
+        exec("from addons." + addon + ".main  import *")
         addon_classes.append(config[addon]["main_class"])
 
 # Записываем все сообщения в файл logs.txt будут записыватся : имя уровня, время, само сообщение
