@@ -141,7 +141,7 @@ class DroidShooter(ShowBase):
         self.props = WindowProperties() # класс настроек
         self.props.setTitle('Droid Game release ' + VERSION) # заголовок окна
         self.props.setUndecorated(True) # убираем раму окна
-        self.props.setSize(1500, 1000) # размер окна
+        self.props.setSize(800, 600) # размер окна
 
         self.openDefaultWindow(props=self.props) # Используем настройки
         
