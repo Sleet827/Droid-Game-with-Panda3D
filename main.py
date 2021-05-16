@@ -26,6 +26,7 @@ from direct.gui.DirectSlider import DirectSlider
 from direct.distributed.PyDatagram import PyDatagram # PyDatagram - простой встроенный модуль в движок для создания онлайна
 
 # Ну, вот, импортируем panda3d(игр. движ.) ну и мой небольшой API к нему - marconit_engine
+from online.client import *
 from panda3d.core import *
 from src.marconit_engine import *
 from src.bot import bot
@@ -35,7 +36,7 @@ from download_levels import downloading
 from src.settings import *
 import src.gui as gui
 from src.GUI.choose_server import *
-from online.Server import *
+#from online.Server import *
 from src.GUI.top_players import *
 from src.GUI.developers import *
 from src.GUI.moderators import *
@@ -47,6 +48,7 @@ import sys
 import time
 import os
 import math
+import simplepbr # simple PBR light.
 import logging
 from multiprocessing import Pool # хочу отметить этот модуль - он позволяет работать программе на разных потоках. Из-за этого игра достаточно оптимизирована
 
@@ -83,14 +85,13 @@ def load_profile(filename_p):
         
 USERNAME = load_profile('./profile.txt') # загружаем профиль
 
-
-def start_server():
-    '''запуск сервера'''
-    worldServer = Server(9099, # порт сервера
-                         0000, # отставание
-                         USERNAME) # создаём сам сервер
-
-    Active = PlayerReg() # теперь подключенный клиент.
+# start client on server
+def start_client():
+    worldClient = Client(9099,ipgetter.myip())
+    N = PlayerReg()
+    keys = Keys()
+    w = World()
+    chatReg = chatRegulator(worldClient,keys)
 
 def showHelpInfo():
     # Говорим пользователю об использованию
@@ -1373,6 +1374,7 @@ class DroidShooter(ShowBase):
         self.pgServers.destroy()
         self.pg452.destroy()
         
+        self.pipeline = simplepbr.init() # initializating pbr light
         
         # все действия над сервером если не включена одиночная игра
         if not self.single:
@@ -1383,7 +1385,7 @@ class DroidShooter(ShowBase):
             self.networking.serverConnect(IP_USER) # коннектим айпи игрока
             self.networking.addClient(self.username) # добавляем клиента.
             self.networking.readTick() # читаем сервер
-            start_server() # то было локальной сетью, а теперь мы создаём сервер онлайна на своём компе              
+            #start_server() # то было локальной сетью, а теперь мы создаём сервер онлайна на своём компе              
 
         # если не выходили скроем глобус
         if not self.exiting:
@@ -1393,6 +1395,9 @@ class DroidShooter(ShowBase):
         if self.single:
             self.pg149.destroy()
 
+        # if no single mode
+        if not self.single:
+            start_client() # starting client
         # удаляем глобус, если не выходили из игры
         if not self.exiting:
             del self.globe
