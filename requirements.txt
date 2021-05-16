@@ -1,3 +1,3 @@
-panda3d>=1.10.9
+panda3d
 PySimpleGUI
 ipgetter2
