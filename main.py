@@ -2037,7 +2037,7 @@ class DroidShooter(ShowBase):
 
 
 for addon_class in addon_classes:
-    exec("addon_class.run()")
+    exec("addon_class().run()")
 
 droid = DroidShooter() # Создадим экземпляр класса нашей игры
 droid.run() # 3апустим игру
