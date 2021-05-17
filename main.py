@@ -51,6 +51,7 @@ import math
 import simplepbr # simple PBR light.
 import logging
 from multiprocessing import Pool # хочу отметить этот модуль - он позволяет работать программе на разных потоках. Из-за этого игра достаточно оптимизирована
+from screeninfo import get_monitors
 
 # For addons
 import json
@@ -132,6 +133,10 @@ class DroidShooter(ShowBase):
         self.username = USERNAME # имя игрока
 
         self.level = load_level(LEVEL1) # уровень по умолчанию
+        
+        for monitor in get_monitors():
+            self.screen_width = monitor.width
+            self.screen_height = monitor.height
 
         self.menu(False) # зaпуск меню
         
@@ -141,7 +146,7 @@ class DroidShooter(ShowBase):
         self.props = WindowProperties() # класс настроек
         self.props.setTitle('Droid Game release ' + VERSION) # заголовок окна
         self.props.setUndecorated(True) # убираем раму окна
-        self.props.setSize(800, 600) # размер окна
+        self.props.setSize(self.screen_width, self.screen_height) # размер окна
 
         self.openDefaultWindow(props=self.props) # Используем настройки
         
