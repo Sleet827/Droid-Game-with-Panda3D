@@ -31,4 +31,4 @@ There are many different features in the game at the moment. You can study them 
 7.  In the menu, click on help.<br>
 Learn the controls and play!<br>
 Thanks<br>
-Special thanks to <a href="https://discourse.panda3d.org/u/panda3dmastercoder">panda3dmastercoder</a>. He was the first to start helping me with development and created this repository. Thanks to <a href="https://discourse.panda3d.org/u/wezu">wezu</a> for the wonderful DirectGUIDesigner program. I used it to create a menu. Also thanks to <a href="https://discourse.panda3d.org/u/ettod">ettod</a> for playing a3p. From there I took the planet model and the menu system.
+Special thanks to <a href="https://discourse.panda3d.org/u/panda3dmastercoder">panda3dmastercoder</a>. He was the first to start helping me with development and created this repository. Thanks to <a href="https://discourse.panda3d.org/u/wezu">wezu</a> for the wonderful DirectGUIDesigner program. I used it to create a menu. Also thanks to <a href="https://discourse.panda3d.org/u/et1337">et1337</a>(<a href="https://github.com/etodd">ettod</a>) for playing a3p. From there I took the planet model and the menu system.
